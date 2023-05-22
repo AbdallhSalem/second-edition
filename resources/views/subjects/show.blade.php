@@ -22,8 +22,9 @@
     </h2>
 <br>
     <h2>
-   ID : {{ $subject->department_id }}
+        {{$subject->department->name}}
     </h2>
+
     @endsection
 </body>
 </html>

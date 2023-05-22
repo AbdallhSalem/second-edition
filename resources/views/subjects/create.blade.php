@@ -20,17 +20,30 @@
 
         <div>
         <label>Name</label>
-        <input class="form-control" type="text" name="name">    
+        <input class="form-control" type="text" name="name" value="{{old('name')}}"> 
+        
+        @error('name')
+        <div class='text text-danger'>
+            {{$message}}    
+        </div>
+        @enderror
+
+
         </div>
         
         
         <div>
             <label>Code</label>
-            <input class="form-control" type="text" name="code">    
+            <input class="form-control" type="text" name="code" value="{{old('code')}}">  
+            @error('code')
+                <div class='text text-danger'>
+                  {{$message}}    
+             </div>
+             @enderror
             </div>
         
             <div>
-                <label>Department Id</label>
+                <label>Department</label>
                 <select name="department_id" class="form-select">
                     @foreach($departments as $department)
                         <option value="{{$department->id}}">
@@ -38,9 +51,7 @@
                         </option>
                     @endforeach
                     
-                </select>
-            
-                <input class="form-control" type="text" name="department_id">    
+                </select>  
                 </div>
         
                 <button type="submit" class="btn btn-success">

@@ -15,9 +15,9 @@ class SubjectController extends Controller
     public function index()
     {
         //
-        // $subjects = Subject::get();
+        $subjects = Subject::paginate(12);
         
-    return view('subjects.index',);
+    return view('subjects.index',['subjects'=>$subjects]);
     }
 
     /**
@@ -40,14 +40,16 @@ class SubjectController extends Controller
         'department_id'=>'required'
     ]);
     Subject::create($formFields);
-    return Redirect::route('subjects.index');
+    return Redirect::route('subjects.index')->with('status','subject added successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Subject $subject)
+    public function show(string $id)
     {
+        $subject = Subject::where('id','=',$id)->with('department')->first();
+
         return view('subjects.show',['subject'=>$subject ]);
     }
 
@@ -78,8 +80,10 @@ class SubjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Subject $subject)
     {
-        //
+        $subject->delete();
+
+        return Redirect::route('subjects.index')->with('status','subject deleted successfully');
     }
 }

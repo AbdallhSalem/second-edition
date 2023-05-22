@@ -28,8 +28,16 @@
             </div>
         
             <div>
-                <label>Department Id</label>
-                <input class="form-control" type="text" name="department_id" value="{{$subject->department_id}}">    
+                <label>Department</label>
+                <select name="department_id" class="form-select">
+                    @foreach($departments as $department)
+                        <option value="{{$department->id}}">
+                            {{$department->name}}
+                        </option>
+                    @endforeach
+                    
+                </select>
+                   
                 </div>
         
                 <button type="submit" class="btn btn-success">
